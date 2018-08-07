@@ -17,10 +17,12 @@ public interface BookDAO {
     boolean addBook(BookDO bookDO);
     @Update("UPDATE `cloud`.`book` SET `title`=#{title}, `author`=#{author}, `address`=#{address}, `creation_time`=#{creationTime}, `update_time`=#{updateTime}, `number`=#{number} WHERE (`NO`=#{NO});")
     boolean updateBook(BookDO bookDO);
+    @Update("UPDATE `cloud`.`book` SET `number`=#{number} WHERE `title`=#{title}, `author`=#{author}, `address`=#{address};")
+    boolean updateBookNumber(BookDO bookDO);
     @Select("SELECT * FROM `cloud`.`book`")
     List<BookDO> selectBookTotal();
     @Select("SELECT * FROM `cloud`.`book` WHERE `NO`=#{NO}")
-    BookDO selectBook(BookDO bookDO);
+    BookDO selectBook(Integer NO);
     @Delete("DELETE FROM `cloud`.`book` WHERE `NO`=#{NO}")
-    boolean delBook(BookDO bookDO);
+    boolean delBook(Integer NO);
 }
