@@ -1,0 +1,17 @@
+server:
+  port: 10123
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:10120/eureka/
+spring:
+  application:
+    name: book-client
+  datasource:
+    username: root
+    url: jdbc:mysql://192.168.21.238:3306/cloud
+    password: 840927
+    driver-class-name: com.mysql.jdbc.Driver

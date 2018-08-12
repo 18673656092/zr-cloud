@@ -13,6 +13,7 @@
         <module name="cloud-mq" />
         <module name="cloud-server" />
         <module name="cloud-zuul" />
+        <module name="zr-cloud" />
         <module name="zr_cloud" />
       </profile>
     </annotationProcessing>

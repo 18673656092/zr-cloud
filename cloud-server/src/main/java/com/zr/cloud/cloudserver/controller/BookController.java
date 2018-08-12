@@ -22,7 +22,7 @@ public class BookController {
     @Resource
     private BookService bookService;
 
-    @PostMapping
+    @PostMapping("/addBook")
     @ResponseBody
     public String addBook(@RequestBody BookDO bookDO) {
         if (bookService.addBook(bookDO)) {
@@ -32,7 +32,7 @@ public class BookController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/updateBook")
     @ResponseBody
     public String updateBook(@RequestBody BookDO bookDO) {
         if (bookService.updateBook(bookDO)) {
@@ -42,7 +42,7 @@ public class BookController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/selectBook")
     @ResponseBody
     public String selectBookTotal() {
         List<BookDO> books = bookService.selectBookTotal();
@@ -53,7 +53,7 @@ public class BookController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/selectBookForNumber")
     @ResponseBody
     public String selectBook(@RequestBody BookDO bookDO) {
         BookDO book = bookService.selectBook(bookDO.getNO());
@@ -64,7 +64,7 @@ public class BookController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/deleteBook")
     @ResponseBody
     public String delBook(@RequestBody BookDO bookDO) {
         if (bookService.delBook(bookDO.getNO())) {
