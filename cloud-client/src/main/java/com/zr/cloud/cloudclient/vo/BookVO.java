@@ -1,15 +1,11 @@
-package com.zr.cloud.cloudserver.DO;
+package com.zr.cloud.cloudclient.vo;
 
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * Created by zhuran on 2018/8/6 0006
- */
 @Component
-public class BookDO {
-
+public class BookVO {
     private String title;
 
     private String author;
@@ -22,22 +18,12 @@ public class BookDO {
 
     private int number;
 
-    private String no;
-
     public int getNumber() {
         return number;
     }
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
     }
 
     public String getTitle() {

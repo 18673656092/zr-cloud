@@ -3,6 +3,7 @@ package com.zr.cloud.cloudserver.controller;
 import com.alibaba.fastjson.JSON;
 import com.zr.cloud.cloudserver.DO.BookDO;
 import com.zr.cloud.cloudserver.service.BookService;
+import com.zr.cloud.cloudserver.utils.RedisClient;
 import com.zr.cloud.cloudserver.utils.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,10 @@ public class BookController {
 
     @Resource
     private BookService bookService;
+    @Resource
+    private RedisClient redisClient;
 
-    @PostMapping
+    @PostMapping("/addBook")
     @ResponseBody
     public String addBook(@RequestBody BookDO bookDO) {
         if (bookService.addBook(bookDO)) {
@@ -32,7 +35,7 @@ public class BookController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/updateBook")
     @ResponseBody
     public String updateBook(@RequestBody BookDO bookDO) {
         if (bookService.updateBook(bookDO)) {
@@ -42,7 +45,7 @@ public class BookController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/selectBook")
     @ResponseBody
     public String selectBookTotal() {
         List<BookDO> books = bookService.selectBookTotal();
@@ -53,10 +56,10 @@ public class BookController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/selectBookForNumber")
     @ResponseBody
     public String selectBook(@RequestBody BookDO bookDO) {
-        BookDO book = bookService.selectBook(bookDO.getNO());
+        BookDO book = bookService.selectBook(bookDO.getNo());
         if (book != null) {
             return Result.make(0, book, "select success");
         } else {
@@ -64,10 +67,10 @@ public class BookController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/deleteBook")
     @ResponseBody
     public String delBook(@RequestBody BookDO bookDO) {
-        if (bookService.delBook(bookDO.getNO())) {
+        if (bookService.delBook(bookDO.getNo())) {
             return Result.make(0, bookDO, "select success");
         } else {
             return Result.make(-1, null, "select null");

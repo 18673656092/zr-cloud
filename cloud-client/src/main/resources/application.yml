@@ -1,5 +1,5 @@
 server:
-  port: 10122
+  port: 10123
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
@@ -9,19 +9,17 @@ eureka:
       defaultZone: http://localhost:10120/eureka/
 spring:
   application:
-    name: book-server
+    name: book-client
   datasource:
     username: root
     url: jdbc:mysql://192.168.21.238:3306/cloud
     password: 840927
     driver-class-name: com.mysql.jdbc.Driver
-  redis:
-    database: 0
-    host: 192.168.21.238
-    port: 6379
-    timeout: 3000
-    pool:
-      max-idle: 200
-      min-idle: 200
-      max-active: 2000
-      max-wait: 1000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000

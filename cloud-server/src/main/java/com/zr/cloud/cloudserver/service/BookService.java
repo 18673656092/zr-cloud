@@ -2,6 +2,7 @@ package com.zr.cloud.cloudserver.service;
 
 import com.zr.cloud.cloudserver.DAO.BookDAO;
 import com.zr.cloud.cloudserver.DO.BookDO;
+import com.zr.cloud.cloudserver.utils.SHA256;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,11 +18,11 @@ public class BookService {
     private BookDAO bookDAO;
 
     public synchronized boolean addBook(BookDO bookDO) {
-        if(selectBook(bookDO.getNO())==null) {
+        bookDO.setNo(SHA256.getSHA256String(bookDO.getTitle() + bookDO.getAddress()));
+        if(selectBook(bookDO.getNo())==null) {
             return bookDAO.addBook(bookDO);
         }else {
-            bookDO.setNumber(selectBook(bookDO.getNO()).getNumber() + bookDO.getNumber());
-            return updateBookNumber(bookDO);
+            return false;
         }
     }
 
@@ -37,11 +38,11 @@ public class BookService {
         return bookDAO.selectBookTotal();
     }
 
-    public BookDO selectBook(Integer NO){
+    public BookDO selectBook(String NO){
         return bookDAO.selectBook(NO);
     }
 
-    public boolean delBook(Integer NO){
+    public boolean delBook(String NO){
         return bookDAO.delBook(NO);
     }
 }
